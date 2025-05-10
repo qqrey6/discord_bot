@@ -1,10 +1,6 @@
-Here’s a professional yet honest `README.md` that includes your message in a cleaned-up way:
+# 🎮 DiscordBot — Minecraft Assistant with Web Search & Memory
 
----
-
-# 🎮 AcaBot — Minecraft Assistant with Web Search & Memory
-
-**AcaBot** is a smart assistant bot powered by the Azure OpenAI API. It can answer Minecraft-related questions, fetch real-time information via web search, and maintain memory using a MySQL database. Designed for both fun and functionality, it supports natural conversations without relying on specific command syntax.
+**DiscordBot** is a smart assistant bot powered by the Azure OpenAI API. It can answer Minecraft-related questions, fetch real-time information via web search, and maintain memory using a MySQL database. Designed for both fun and functionality, it supports natural conversations without relying on specific command syntax.
 
 ---
 
