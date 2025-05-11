@@ -1,5 +1,5 @@
 /*
- * This file is part of [Project Name].
+ * This file is part of discord_bot.
  *
  * Copyright (C) 2025 qqrey6
  *
