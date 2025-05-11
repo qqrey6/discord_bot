@@ -1,6 +1,6 @@
 # 🎮 DiscordBot — Minecraft Assistant with Web Search & Memory
 
-**Edson** is a smart assistant bot powered by the Azure OpenAI API. It can answer Minecraft-related questions, fetch real-time information via web search, and maintain memory using a MySQL database. Designed for both fun and functionality, it supports natural conversations without relying on specific command syntax.
+**Edson** is a smart assistant bot powered by the Azure OpenAI API. It can answer question especially Minecraft-related questions, fetch real-time information via web search(only for Minecraft-related questions), and maintain memory using a MySQL database. Designed for both fun and functionality, it supports natural conversations without relying on specific command syntax.
 
 ---
 
