@@ -1,0 +1,55 @@
+-- Table for storing messages (with embedding column and reference_id)
+CREATE TABLE IF NOT EXISTS messages (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id VARCHAR(100) NOT NULL,
+    role ENUM('system', 'user', 'assistant') NOT NULL,
+    message TEXT NOT NULL,
+    embedding BLOB,
+    reference_id INT,  -- Added field to track which message this is replying to
+    thread_id VARCHAR(100),  -- Optional field to group messages in the same thread
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    INDEX (user_id),
+    INDEX (reference_id),
+    INDEX (thread_id),
+    FOREIGN KEY (reference_id) REFERENCES messages(id) ON DELETE SET NULL
+);
+
+-- Table for storing user profiles
+CREATE TABLE IF NOT EXISTS user_profiles (
+    user_id VARCHAR(100) PRIMARY KEY,
+    canonical_name VARCHAR(100) NOT NULL,
+    aliases TEXT,  -- stored as a JSON array of strings
+    note TEXT
+);
+
+-- Table for storing attachments linked to messages
+CREATE TABLE IF NOT EXISTS attachments (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    message_id INT NOT NULL,
+    type ENUM('image', 'text') NOT NULL,
+    content TEXT NOT NULL,  -- For image: URL, for text: raw content
+    FOREIGN KEY (message_id) REFERENCES messages(id) ON DELETE CASCADE
+);
+
+-- Table for tracking message thread relationships
+CREATE TABLE IF NOT EXISTS message_threads (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    thread_id VARCHAR(100) NOT NULL,
+    thread_name VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    last_active TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    UNIQUE KEY (thread_id)
+);
+
+-- Optional: Table for channel history with thread awareness
+CREATE TABLE IF NOT EXISTS channel_history (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    channel_id VARCHAR(100) NOT NULL,
+    message_id INT NOT NULL,
+    thread_id VARCHAR(100),
+    position INT,  -- Position in the conversation sequence
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (message_id) REFERENCES messages(id) ON DELETE CASCADE,
+    INDEX (channel_id),
+    INDEX (thread_id)
+);
